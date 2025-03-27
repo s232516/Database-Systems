@@ -21,7 +21,6 @@ CREATE TABLE Doctor (
   FOREIGN KEY (DeptID) REFERENCES Department(DeptID) ON DELETE SET NULL
 );
 
-
 CREATE TABLE Room (
   RoomID INT,
   Type VARCHAR(50),
@@ -64,7 +63,7 @@ CREATE TABLE Appointment (
 CREATE TABLE MedicalRecord (
   RecordID INT,
   Medication TEXT,
-  Dossage NUMERIC,
+  Dosage TEXT,
   Diagnosis TEXT,
   AppointmentID INT,
   PRIMARY KEY (RecordID),
@@ -127,11 +126,18 @@ INSERT INTO Appointment (AppointmentID, PatientID, RoomID, DoctorID, Appointment
 (6, 6, 6, 6, '2025-03-30 10:45:00', 'General check-up'),
 (7, 7, 7, 7, '2025-03-31 12:15:00', 'X-ray for possible fracture');
 
-INSERT INTO MedicalRecord (RecordID, Medication, Dossage, Diagnosis, AppointmentID) VALUES
-(1, 'Aspirin', 100, 'Hypertension', 1),
-(2, 'Ibuprofen', 200, 'Migraine', 2),
-(3, 'Paracetamol', 500, 'Arthritis', 3),
-(4, 'Amoxicillin', 250, 'Influenza', 4),
-(5, 'Hydrocortisone', 50, 'Eczema', 5),
-(6, 'Multivitamins', 1, 'Routine Health Check', 6),
-(7, 'None', 0, 'Suspected fracture, awaiting further tests', 7);
+INSERT INTO MedicalRecord (RecordID, Medication, Dosage, Diagnosis, AppointmentID) VALUES
+(1, 'Aspirin 100mg', 100, 'Hypertension', 1),
+(2, NULL, NULL, 'Suspected fracture, awaiting further tests', 1),
+(3, 'Ibuprofen 200mg', 200, 'Migraine', 2),
+(4, NULL, NULL, 'Suspected fracture, awaiting further tests', 2),
+(5, 'Paracetamol 500mg', 500, 'Arthritis', 3),
+(6, NULL, NULL, 'Suspected fracture, awaiting further tests', 3),
+(7, 'Amoxicillin 250mg', 250, 'Influenza', 4),
+(8, NULL, NULL, 'Suspected fracture, awaiting further tests', 4),
+(9, 'Hydrocortisone 50mg', '1 ', 'Eczema', 5),
+(10, NULL, NULL, 'Suspected fracture, awaiting further tests', 5),
+(11, 'Multivitamins', 1, 'Routine Health Check', 6),
+(12, NULL, NULL, 'Suspected fracture, awaiting further tests', 6),
+(13, NULL, NULL, 'Suspected fracture, awaiting further tests', 7);
+
