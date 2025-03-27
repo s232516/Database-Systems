@@ -135,17 +135,17 @@ INSERT INTO Appointment (AppointmentID, PatientID, RoomID, DoctorID, Appointment
 (8, 2, 9, 9, '2025-04-02 09:00:00', 'General check-up');
 
 INSERT INTO MedicalRecord (RecordID, Medication, Dosage, Diagnosis, AppointmentID) VALUES
-(1, 'Aspirin 100mg', 100, 'Hypertension', 1),
+(1, 'Aspirin 100mg', '1-2 times daily', 'Hypertension', 1),
 (2, NULL, NULL, 'Patient described dizziness and headaches, hypertension suspected', 1),
-(3, 'Ibuprofen 200mg', 200, 'Migraine', 2),
+(3, 'Ibuprofen 200mg', 'every 8 hours', 'Migraine', 2),
 (4, NULL, NULL, 'Patient described headache on frontal area, migraines suspected', 2),
-(5, 'Paracetamol 500mg', 500, 'Arthritis', 3),
+(5, 'Paracetamol 500mg', 'every 8 hours', 'Arthritis', 3),
 (6, NULL, NULL, 'Suspected fracture, awaiting further tests', 3),
-(7, 'Amoxicillin 250mg', 250, 'Influenza', 4),
+(7, 'Amoxicillin 250mg', 'after meals, 2 times daily', 'Influenza', 4),
 (8, NULL, NULL, 'Coughing and prolonged fever for 3 days', 4),
-(9, 'Hydrocortisone 50mg', '1 ', 'Eczema', 5),
+(9, 'Hydrocortisone 50mg', 'apply on affected areas 2 times daily', 'Eczema', 5),
 (10, NULL, NULL, 'Skin dryness on hand and elbow area', 5),
-(11, 'Multivitamins', 1, NULL, 6),
+(11, 'Multivitamins', '1 daily', NULL, 6),
 (12, NULL, NULL, 'Patient described tiredness symptoms', 6),
 (13, NULL, NULL, 'No fracture observed', 7),
 (14, NULL, NULL, 'Consultation about vaccines for travelling', 8);
