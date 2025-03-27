@@ -1,62 +1,79 @@
+DROP TABLE IF EXISTS Department;
+DROP TABLE IF EXISTS Doctor;
+DROP TABLE IF EXISTS Room;
+DROP TABLE IF EXISTS Patient;
+DROP TABLE IF EXISTS Nurse;
+DROP TABLE IF EXISTS Appointment;
+DROP TABLE IF EXISTS MedicalRecord;
+
+CREATE TABLE Department (
+  DeptID INT,
+  DepartmentName VARCHAR(50),
+  PRIMARY KEY (DeptID)
+);
+
+CREATE TABLE Doctor (
+  DoctorID INT,
+  DoctorName VARCHAR(50),
+  Speciality VARCHAR(50),
+  DeptID INT,
+  PRIMARY KEY (DoctorID),
+  FOREIGN KEY (DeptID) REFERENCES Department(DeptID) ON DELETE SET NULL
+);
+
+
+CREATE TABLE Room (
+  RoomID INT,
+  Type VARCHAR(50),
+  PRIMARY KEY (RoomID)
+);
+
 CREATE TABLE Patient (
-  PatientID INT PRIMARY KEY,
-  Name VARCHAR(50),
+  PatientID INT,
+  PatientName VARCHAR(50),
   Gender VARCHAR(50),
   DateOfBirth DATE,
   Address TEXT,
   AssignmentDate DATETIME,
   DoctorID INT,
+  PRIMARY KEY (PatientID),
   FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID) ON DELETE SET NULL
 );
 
-CREATE TABLE Doctor (
-  DoctorID INT PRIMARY KEY,
-  Name VARCHAR(50),
-  Speciality VARCHAR(50),
-  DeptID INT,
-  FOREIGN KEY (DeptID) REFERENCES Department(DeptID) ON DELETE SET NULL
-);
-
-CREATE TABLE Department (
-  DeptID INT PRIMARY KEY,
-  Name VARCHAR(50)
-);
-
 CREATE TABLE Nurse (
-  NurseID INT PRIMARY KEY,
-  Name VARCHAR(50),
+  NurseID INT,
+  NurseName VARCHAR(50),
   DepartmentID INT,
+  PRIMARY KEY (NurseID),
   FOREIGN KEY (DepartmentID) REFERENCES Department(DeptID) ON DELETE SET NULL
 );
 
 CREATE TABLE Appointment (
-  AppointmentID INT PRIMARY KEY,
+  AppointmentID INT,
   PatientID INT,
   RoomID INT,
   DoctorID INT,
   AppointmentDate DATETIME,
   Reason TEXT,
+  PRIMARY KEY (AppointmentID),
   FOREIGN KEY (PatientID) REFERENCES Patient(PatientID) ON DELETE SET NULL,
   FOREIGN KEY (RoomID) REFERENCES Room(RoomID) ON DELETE SET NULL,
   FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID) ON DELETE SET NULL
 );
 
 CREATE TABLE MedicalRecord (
-  RecordID INT PRIMARY KEY,
+  RecordID INT,
   Medication TEXT,
   Dossage NUMERIC,
   Diagnosis TEXT,
   AppointmentID INT,
+  PRIMARY KEY (RecordID),
   FOREIGN KEY (AppointmentID) REFERENCES Appointment(AppointmentID) ON DELETE CASCADE
 );
 
-CREATE TABLE Room (
-  RoomID INT PRIMARY KEY,
-  Type VARCHAR(50)
-);
 
 -- Insert sample data
-INSERT INTO Department (DeptID, Name) VALUES
+INSERT INTO Department (DeptID, DepartmentName) VALUES
 (1, 'Cardiology'),
 (2, 'Neurology'),
 (3, 'Orthopedics'),
@@ -65,7 +82,7 @@ INSERT INTO Department (DeptID, Name) VALUES
 (6, 'General Practitioner'),
 (7, 'Radiology');
 
-INSERT INTO Doctor (DoctorID, Name, Speciality, DeptID) VALUES
+INSERT INTO Doctor (DoctorID, DoctorName, Speciality, DeptID) VALUES
 (1, 'Dr. Lars Mikkelsen', 'Cardiologist', 1),
 (2, 'Dr. Sofie Andersen', 'Neurologist', 2),
 (3, 'Dr. Henrik Nielsen', 'Orthopedic Surgeon', 3),
@@ -74,7 +91,7 @@ INSERT INTO Doctor (DoctorID, Name, Speciality, DeptID) VALUES
 (6, 'Dr. Erik Holm', 'General Practitioner', 6),
 (7, 'Dr. Anna Petersen', 'Radiologist', 7);
 
-INSERT INTO Patient (PatientID, Name, Gender, DateOfBirth, Address, AssignmentDate, DoctorID) VALUES
+INSERT INTO Patient (PatientID, PatientName, Gender, DateOfBirth, Address, AssignmentDate, DoctorID) VALUES
 (1, 'Ida Sørensen', 'Female', '1985-04-12', 'Strandvejen 12, København', '2025-03-20 10:30:00', 1),
 (2, 'Mikkel Jensen', 'Male', '1990-07-23', 'Nørrebrogade 45, København', '2025-03-21 11:00:00', 2),
 (3, 'Anders Pedersen', 'Male', '1982-12-15', 'Østerbrogade 78, København', '2025-03-22 14:00:00', 3),
@@ -83,7 +100,7 @@ INSERT INTO Patient (PatientID, Name, Gender, DateOfBirth, Address, AssignmentDa
 (6, 'Søren Kristensen', 'Male', '1975-06-14', 'Roskildevej 25, Roskilde', '2025-03-21 15:00:00', 6),
 (7, 'Lotte Henriksen', 'Female', '1988-11-03', 'Vesterbrogade 98, København', '2025-03-22 08:30:00', 6);
 
-INSERT INTO Nurse (NurseID, Name, DepartmentID) VALUES
+INSERT INTO Nurse (NurseID, NurseName, DepartmentID) VALUES
 (1, 'Nurse Katrine Møller', 1),
 (2, 'Nurse Jonas Rasmussen', 2),
 (3, 'Nurse Maria Olesen', 3),
